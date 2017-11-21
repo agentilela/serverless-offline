@@ -408,12 +408,12 @@ class Offline {
             // Payload processing
             
              // TODO: Temporary fix, confirm if AWS mangles the string or not to utf8
-+            if (_.includes(request.headers['content-type'], 'multipart/form-data')) {
-+              request.payload = request.payload && request.payload.toString('binary');
-+            }
-+            else {
-+              request.payload = request.payload && request.payload.toString();
-+            }
+            if (_.includes(request.headers['content-type'], 'multipart/form-data')) {
+              request.payload = request.payload && request.payload.toString('binary');
+            }
+            else {
+              request.payload = request.payload && request.payload.toString();
+            }
 
             // Headers processing
             // Hapi lowercases the headers whereas AWS does not
