@@ -406,7 +406,14 @@ class Offline {
           config: routeConfig,
           handler: (request, reply) => { // Here we go
             // Payload processing
-            request.payload = request.payload && request.payload.toString();
+            
+             // TODO: Temporary fix, confirm if AWS mangles the string or not to utf8
++            if (_.includes(request.headers['content-type'], 'multipart/form-data')) {
++              request.payload = request.payload && request.payload.toString('binary');
++            }
++            else {
++              request.payload = request.payload && request.payload.toString();
++            }
 
             // Headers processing
             // Hapi lowercases the headers whereas AWS does not
